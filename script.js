@@ -116,7 +116,7 @@ expos.forEach((square, index) => {
       background.style.opacity = '1';
       title.classList.add('visible');
       plus.classList.add('visible');
-    }, 750));
+    }, 500));
   });
 
   square.addEventListener('mouseleave', () => {
