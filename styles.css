@@ -1,0 +1,162 @@
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('fonts/CabinetGrotesk-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Cabinet Grotesk Bold';
+  src: url('fonts/CabinetGrotesk-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  height: 100vh;
+  background-color: white;
+  transition: background-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#background-layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#initial-message {
+  font-family: 'Cabinet Grotesk';
+  text-align: center; /* centrado del texto */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  color: black;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#initial-message .bold {
+  font-family: 'Cabinet Grotesk Bold', sans-serif;
+}
+
+#initial-message.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(14, 60px);
+  grid-template-rows: repeat(14, 60px);
+  gap: 30px;
+  padding: 120px;
+  width: 100%;
+  height: calc(100% - 240px); /* asegura margen top y bottom iguales */
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.expo {
+  background-color: black;
+  width: 50px;
+  height: 50px;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+  transform-origin: center;
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.expo.expanded {
+  transform: scale(3);
+  z-index: 2;
+}
+
+.expo.locked .expo-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.expo-title {
+  position: absolute;
+  font-family: 'Cabinet Grotesk Bold', sans-serif;
+  top: 6px;
+  left: 6px;
+  color: black;
+  font-size: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.10s;
+  pointer-events: none;
+}
+
+.expo-title.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.expo-plus {
+  position: absolute;
+  bottom: 6px;
+  right: 6px; /* mismo margen que título */
+  font-size: 0.6rem;
+  color: black;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition: opacity 0.10s;
+  z-index: 4;
+}
+
+.expo-plus.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.expo-panel {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 50px;   /* ancho del cuadrado expandido */
+  height: 50px;  /* alto del cuadrado expandido */
+  background-color: black; /* dinámico en JS */
+  color: black; /* texto en negro */
+  font-size: 0.4rem;
+  padding: 8px;
+  opacity: 1;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.expo.locked .expo-panel {
+  transform: scaleX(1);
+  pointer-events: auto;
+}
+.expo-plus {
+  position: absolute;
+  top: 6px;     /* mismo margen que el título arriba */
+  right: 6px;   /* margen simétrico a la derecha */
+  font-size: 0.6rem;
+  color: black;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition: opacity 0.10s;
+  z-index: 4;
+}
